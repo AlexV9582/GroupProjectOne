@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>BaH Entertainment</title>
+	</head>
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<body>
+		<div class="container">
+			<div class="jumbotron">
+				<h1 class="text-center">BaH Entertainment</h1>
+				<h3 class="text-center">Help us, Help you!</h3>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">Search</h3>
+							</div>
+							<div class="panel-body">
+								<div class="table-responsive">
+									<table class="table">
+										<thead>
+											<tr>
+												<th>Title</th>
+												<th>Genre</th>
+												<th>Release Year</th>
+												<th>Type</th>
+											</tr>
+										</thead>
+									<tbody id="emptyTable"></tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="panel panel-default">
+						<div class="panel heading">
+							<h4 class="panel title">Add Parameters</h4>
+						</div>
+						<form>
+							<div class="form-group">
+								<label for="title">Title</label>
+								<input class="form-control" id="title" type="text">
+							</div>
+							<div class="form-group">
+								<label for="genre">Genre</label>
+								<input class="form-control" id="genre" type="text">
+							</div>
+							<div class="form-group">
+								<label for="releaseYear">Release Year</label>
+								<input class="form-control" id="releaseYear" type="text">
+							</div>
+							<div class="form-group">
+								<label for="type">Type</label>
+								<input class="form-control" id="type" type="text">
+							</div>
+							<button class="btn-warning btn-primary" id="submit" type="submit">Search</button>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class= "row">
+				<div class="col-md-12">
+					<button class="btn-warning btn-primary" id="prev" type="submit">Prev</button>
+					<button class="btn-warning btn-primary pull-right" id="next" type="submit">Next</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
