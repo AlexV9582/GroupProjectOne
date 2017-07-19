@@ -45,21 +45,28 @@
 						</div>
 						<form>
 							<div class="form-group">
-								<label for="title">Title</label>
+								<label for="title">Title
+								</label>
 								<input class="form-control" id="title" type="text">
 							</div>
-							<div class="form-group">
-								<label for="plot">Plot</label>
-								<input class="form-control" id="plot" type="text">
-							</div>
+							Plot
+							<select>
+							  <option id="short" value="short">Short</option>
+							  <option id="full" value="full">Full</option>
+							</select>
+							<br><br><br>
 							<div class="form-group">
 								<label for="releaseYear">Release Year</label>
 								<input class="form-control" id="releaseYear" type="text">
 							</div>
-							<div class="form-group">
-								<label for="type">Type</label>
-								<input class="form-control" id="type" type="text">
-							</div>
+							Type
+							<select>
+							  <option id="movie" value="movie">Movie</option>
+							  <option id="series" value="series">Series</option>
+							  <option id="TVShow" value="TVShow">TV Show</option>
+							</select>
+							<br><br><br>
+
 							<button class="btn-warning btn-primary" id="submit" type="submit">Search</button>
 						</form>
 					</div>
@@ -69,6 +76,6 @@
 		</div>
 	</div>
 </body>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script type="text/javascript" src="assets/javascript/app.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="assets/javascript/app.js"></script>
 </html>
