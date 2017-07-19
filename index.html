@@ -25,8 +25,9 @@
 										<thead>
 											<tr>
 												<th>Title</th>
-												<th>Plot</th>
+												<th>Plot Summary</th>
 												<th>Release Year</th>
+												<th>Genre</th>
 												<th>Type</th>
 											</tr>
 										</thead>
@@ -49,30 +50,47 @@
 								</label>
 								<input class="form-control" id="title" type="text">
 							</div>
-							Plot
-							<select id="plotLength"> 
-							  <option id="short" value="short">Short</option>
-							  <option id="full" value="full">Full</option>
+							<br>
+							
+							Plot Summary:
+							<select id="plotLength">
+								<option id="short" value="short">Short</option>
+								<option id="full" value="full">Full</option>
 							</select>
 							<br><br><br>
 							<div class="form-group">
 								<label for="releaseYear">Release Year</label>
 								<input class="form-control" id="releaseYear" type="text">
 							</div>
-							Type
-							<select id="type">
-							  <option id="movie" value="movie">Movie</option>
-							  <option id="series" value="series">Series</option>
-							  <option id="TVShow" value="TVShow">TV Show</option>
+							<br>
+							Genre:
+							<select id-="genre">
+								<option id="action" value="action">Action</option>
+								<option id="adventure" value="adventure">Adventure</option>
+								<option id="comedy" value="comedy">Comedy 
+								<option id="crime&gangster" value="crime&gangster">Crime and Gangster</option>
+								<option id="drama" value="drama">Drama</option>
+								<option id="epics/historical" value="epics/historical">Epics/Historical</option>
+								<option id="horror" value="horror">horror</option>
+								<option id="scienceFiction" value="scienceFiction">Science Fiction</option>
+								<option id="war" value="TVShow">War
+								<option id="western" value="western">Western
 							</select>
 							<br><br><br>
-
+							
+							Type:
+							<select id="type">
+								<option id="movie" value="movie">Movie</option>
+								<option id="series" value="series">Series</option>
+								<option id="TVShow" value="TVShow">TV Show</option>
+							</select>
+							<br><br><br>
 							<button class="btn-warning btn-primary" id="submit" type="submit">Search</button>
+							<br><br>
 						</form>
 					</div>
 				</div>
 			</div>
-			
 		</div>
 	</div>
 </body>
