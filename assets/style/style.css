@@ -5,3 +5,17 @@ body {
   -o-background-size: cover;
   background-size: cover;
 }
+.jumbotron
+{
+
+	background:transparent;
+}
+h2
+{
+	color:#55c60b;
+}
+.jumbotron h1
+{
+	color:#55c60b;
+	font-weight:bold;
+}
