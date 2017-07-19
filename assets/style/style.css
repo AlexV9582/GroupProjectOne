@@ -12,10 +12,12 @@ body {
 }
 h2
 {
-	color:#55c60b;
+	-webkit-text-stroke: 1px white;
+	color:blue;
 }
 .jumbotron h1
 {
-	color:#55c60b;
+	-webkit-text-stroke: 1px white;
+	color:blue;
 	font-weight:bold;
 }
