@@ -1,3 +1,14 @@
+
+$( document ).ready(function() {
+    console.log( "ready!" );
+
+var queryUrlOmdb = "http://www.omdbapi.com/?t=" + title + "&y= " + releaseYear + "&plot=short&apikey=40e9cece";
+var title;
+var genre;
+var plot;
+var releaseYear;
+var type;
+
 // Initiate firebase
 var config = {
     apiKey: "AIzaSyBjnkoINWWrc7OVGEkwWvqM96FZ8OuVQWw",
@@ -9,13 +20,14 @@ var config = {
   };
   firebase.initializeApp(config);
 
-var title;
-var genre;
-var plot;
-var releaseYear;
-var type;
-var database = firebase.database();
-var queryUrlOmdb = "http://www.omdbapi.com/?t=" + title + "&y= " + releaseYear + "&plot=short&apikey=40e9cece";
+//Make api call to omdb for user input fields
+$.ajax({
+	url: queryUrlOmdb,
+	method: "GET"
+}).done(function(response){
+	console.log(response)
+})
+
 //On Submit click add user input to firebase
 
 $("#submit").on("click", function(){
@@ -29,17 +41,9 @@ $("#submit").on("click", function(){
 	genre       = $("#genre").val().trim();
 	releaseYear = $("#releaseYear").val().trim();
 	type        = $("#type").val().trim();
-
-	//Make api call to omdb for user input fields
-	
-	$.ajax({
-		url: queryUrlOmdb,
-		method: "GET"
-	}).done(function(response){
-		console.log(response)
-	})
-
 })
+
+});
 
 /*$.ajax({
 	url: queryUrl,
