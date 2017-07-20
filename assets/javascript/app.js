@@ -34,9 +34,9 @@ $("#submit").on("click", function(event){
 	releaseYear            = $("#releaseYear").val().trim();
 	type                   = $("#type").val();
 	genre                  = $("#genre").val();
-	var queryUrlOmdb       = "http://www.omdbapi.com/?t=" + title + "&y= " + releaseYear + "&plot=" + plot + "short&apikey=40e9cece";
-	var queryUrlGuideBox   = "http://api-public.guidebox.com/v2/search?api_key=155b7418532bb36f6fa21cd7eed82f2e1913b798&type=" + type + "&field=title&query=" + title + "&genres=" + genre	
-	var queryUrlYouTube    = "https://www.googleapis.com/youtube/v3/search?part=string,snippet&maxResults=10&apikey=AIzaSyAJ6xzy4STLhI_BT2X7pPwRCW_YnC8TmyM"
+	var queryUrlOmdb       = "https://www.omdbapi.com/?t=" + title + "&y= " + releaseYear + "&plot=" + plot + "&apikey=40e9cece";
+	var queryUrlGuideBox   = "https://api-public.guidebox.com/v2/search?api_key=155b7418532bb36f6fa21cd7eed82f2e1913b798&type=" + type + "&field=title&query=" + title + "&genres=" + genre	
+	var queryUrlYouTube    = "https://www.googleapis.com/youtube/v3/search?part=string,snippet&maxResults=10&apikey=AIzaSyDQ8Tst3v2WmurGUFrLdEYyd1EibjkDb6c"
 
 	console.log(title);
 	console.log(plot);
