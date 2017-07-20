@@ -4,16 +4,16 @@ var config = {
     authDomain: "group-project-1-e3e12.firebaseapp.com",
     databaseURL: "https://group-project-1-e3e12.firebaseio.com",
     projectId: "group-project-1-e3e12",
-    storageBucket: "",
+    storageBucket: "group-project-1-e3e12.appspot.com",
     messagingSenderId: "912831319406"
   };
   firebase.initializeApp(config);
 
 var title;
-var genre;
 var plot;
 var releaseYear;
 var type;
+var genre;
 var database = firebase.database();
 
 
@@ -23,19 +23,20 @@ $("#submit").on("click", function(event){
 	event.preventDefault();
 
 	database.ref().push({
-		title:           $("#title").val().trim(),
-		plot:            $("#plotLength").val(),
-		releaseYear:     $("#releaseYear").val().trim(),
-		type:            $("#type").val(),
-		genre:           $("#genre").val()
+		title:             $("#title").val().trim(),
+		plot:              $("#plotLength").val(),
+		releaseYear:       $("#releaseYear").val().trim(),
+		type:              $("#type").val(),
+		genre:             $("#genre").val()
 	})
-	title                = $("#title").val().trim();
-	plot                 = $("#plotLength").val();
-	releaseYear          = $("#releaseYear").val().trim();
-	type                 = $("#type").val();
-	genre                = $("#genre").val();
-	var queryUrlOmdb     = "http://www.omdbapi.com/?t=" + title + "&y= " + releaseYear + "&plot=" + plot + "short&apikey=40e9cece";
-	var queryUrlGuideBox = "http://api-public.guidebox.com/v2/search?api_key=155b7418532bb36f6fa21cd7eed82f2e1913b798&type=" + type + "&field=title&query=" + title + "&genres=" + genre
+	title                  = $("#title").val().trim();
+	plot                   = $("#plotLength").val();
+	releaseYear            = $("#releaseYear").val().trim();
+	type                   = $("#type").val();
+	genre                  = $("#genre").val();
+	var queryUrlOmdb       = "http://www.omdbapi.com/?t=" + title + "&y= " + releaseYear + "&plot=" + plot + "short&apikey=40e9cece";
+	var queryUrlGuideBox   = "http://api-public.guidebox.com/v2/search?api_key=155b7418532bb36f6fa21cd7eed82f2e1913b798&type=" + type + "&field=title&query=" + title + "&genres=" + genre	
+	var queryUrlYouTube    = "https://www.googleapis.com/youtube/v3/search?part=string&apikey=AIzaSyAJ6xzy4STLhI_BT2X7pPwRCW_YnC8TmyM"
 
 	console.log(title);
 	console.log(plot);
@@ -59,6 +60,13 @@ $("#submit").on("click", function(event){
 		console.log(response)
 	})
 
+	$.ajax({
+	url: queryUrlYouTube,
+	method: "GET"
+	}).done(function(response){
+		console.log(response)
+	})
+	
 
 	title       = $("#title").val("");
 	plot        = $("plotLength").val("");
@@ -73,12 +81,9 @@ $("#submit").on("click", function(event){
 
 
 
-/*$.ajax({
-	url: queryUrl,
-	method: "GET"
-}).done(function(response){
-	console.log(response)
-})
+
+
+/*
 
 $.ajax({
 	url: queryUrl,
