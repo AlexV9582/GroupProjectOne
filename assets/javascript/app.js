@@ -21,10 +21,11 @@ var database = firebase.database();
 database.ref().on("value", function(snapshot) {
 	if (snapshot.child("title").exists() && snapshot.child("plot").exists() && snapshot.child("releaseYear").exists() && snapshot.child("type").exists() && snapshot.child("genre").exists()) {
 		title        = snapshot.val().title;
-	    plot         = snapshot.val().plot;
+	    plotLength   = snapshot.val().plotLength;
 	    releaseYear  = snapshot.val().releaseYear;
 	    type         = snapshot.val().type;
    	    genre        = snapshot.val().genre;
+   	    plot         = snapshot.val().plot;
    	}
 })
 //On Submit click add user input to firebase
@@ -34,22 +35,23 @@ $("#submit").on("click", function(event){
 
 	database.ref().push({
 		title:             $("#title").val().trim(),
-		plot:              $("#plotLength").val(),
+		plotLength:        $("#plotLength").val(),
 		releaseYear:       $("#releaseYear").val().trim(),
 		type:              $("#type").val(),
 		genre:             $("#genre").val()
+		//plot:              snapshot.val().plot
 	})
 	title                  = $("#title").val().trim();
-	plot                   = $("#plotLength").val();
+	plotLength             = $("#plotLength").val();
 	releaseYear            = $("#releaseYear").val().trim();
 	type                   = $("#type").val();
 	genre                  = $("#genre").val();
-	var queryUrlOmdb       = "https://www.omdbapi.com/?t=" + title + "&y= " + releaseYear + "&plot=" + plot + "&apikey=40e9cece";
+	var queryUrlOmdb       = "https://www.omdbapi.com/?t=" + title + "&y= " + releaseYear + "&plot=" + plotLength + "&apikey=40e9cece";
 	var queryUrlGuideBox   = "https://api-public.guidebox.com/v2/search?api_key=155b7418532bb36f6fa21cd7eed82f2e1913b798&type=" + type + "&field=title&query=" + title + "&genres=" + genre	
 	var queryUrlYouTube    = "https://www.googleapis.com/youtube/v3/search?part=string,snippet&maxResults=10&apikey=AIzaSyDQ8Tst3v2WmurGUFrLdEYyd1EibjkDb6c"
 
 	console.log(title);
-	console.log(plot);
+	console.log(plotLength);
 	console.log(releaseYear);
 	console.log(type);
 	console.log(genre);
@@ -71,16 +73,25 @@ $("#submit").on("click", function(event){
 		console.log(response)
 	})
 
+	var queryUrlYouTube    = "https://www.googleapis.com/youtube/v3/search";
+	var query = title;
+
 	$.ajax({
-	url: queryUrlYouTube,
-	method: "GET"
+		url: queryUrlYouTube,
+		method: "GET",
+		data: {
+			key: "AIzaSyDQ8Tst3v2WmurGUFrLdEYyd1EibjkDb6c",
+			q: query,
+			maxResults: 10,
+			part: "snippet"
+		}
 	}).done(function(response){
-		console.log(response)
+			console.log(response)
 	})
 	
 
 	title       = $("#title").val("");
-	plot        = $("plotLength").val("");
+	plotLength  = $("plotLength").val("");
 	genre       = $("#genre").val("");
 	releaseYear = $("#releaseYear").val("");
 	type        = $("#type").val("");
