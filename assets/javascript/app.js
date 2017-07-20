@@ -16,7 +16,17 @@ var type;
 var genre;
 var database = firebase.database();
 
+//If firebase data exists assign to variables
 
+database.ref().on("value", function(snapshot) {
+	if (snapshot.child("title").exists() && snapshot.child("plot").exists() && snapshot.child("releaseYear").exists() && snapshot.child("type").exists() && snapshot.child("genre").exists()) {
+		title        = snapshot.val().title;
+	    plot         = snapshot.val().plot;
+	    releaseYear  = snapshot.val().releaseYear;
+	    type         = snapshot.val().type;
+   	    genre        = snapshot.val().genre;
+   	}
+})
 //On Submit click add user input to firebase
 
 $("#submit").on("click", function(event){
@@ -45,6 +55,7 @@ $("#submit").on("click", function(event){
 	console.log(genre);
 
 	//Make api calls for user input fields
+
 	
 	$.ajax({
 		url: queryUrlOmdb,
@@ -76,8 +87,12 @@ $("#submit").on("click", function(event){
 
 })
 
-
-
+//Add data to table
+database.ref().limitToLast(10).on("child_added", function(snapshot){
+	var sv = snapshot.val();
+	console.log(sv);
+	$("tbody").append($("<tr><td>" + sv.title + "</td><td>" + sv.plot + "</td><td>" + sv.releaseYear + "</td><td>" + sv.genre + "</td><td>" + sv.type + ""))
+})
 
 
 
