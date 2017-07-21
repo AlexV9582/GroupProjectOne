@@ -16,6 +16,19 @@ var type;
 var genre;
 var database = firebase.database();
 
+//Function to push data to DB
+function push(){
+	database.ref().push({
+		title:             $("#title").val().trim(),
+		plotLength:        $("#plotLength").val(),
+		releaseYear:       $("#releaseYear").val().trim(),
+		type:              $("#type").val(),
+		genre:             $("#genre").val(),
+		plot:              plot
+	})
+	
+}
+
 //If firebase data exists assign to variables
 
 database.ref().on("value", function(snapshot) {
@@ -33,14 +46,6 @@ database.ref().on("value", function(snapshot) {
 $("#submit").on("click", function(event){
 	event.preventDefault();
 
-	database.ref().push({
-		title:             $("#title").val().trim(),
-		plotLength:        $("#plotLength").val(),
-		releaseYear:       $("#releaseYear").val().trim(),
-		type:              $("#type").val(),
-		genre:             $("#genre").val()
-		//plot:              snapshot.val().plot
-	})
 	title                  = $("#title").val().trim();
 	plotLength             = $("#plotLength").val();
 	releaseYear            = $("#releaseYear").val().trim();
@@ -48,7 +53,6 @@ $("#submit").on("click", function(event){
 	genre                  = $("#genre").val();
 	var queryUrlOmdb       = "https://www.omdbapi.com/?t=" + title + "&y= " + releaseYear + "&plot=" + plotLength + "&apikey=40e9cece";
 	var queryUrlGuideBox   = "https://api-public.guidebox.com/v2/search?api_key=155b7418532bb36f6fa21cd7eed82f2e1913b798&type=" + type + "&field=title&query=" + title + "&genres=" + genre	
-	var queryUrlYouTube    = "https://www.googleapis.com/youtube/v3/search?part=string,snippet&maxResults=10&apikey=AIzaSyDQ8Tst3v2WmurGUFrLdEYyd1EibjkDb6c"
 
 	console.log(title);
 	console.log(plotLength);
@@ -64,6 +68,9 @@ $("#submit").on("click", function(event){
 		method: "GET"
 	}).done(function(response){
 		console.log(response)
+		plot = response.Plot
+		console.log(plot)
+		push()
 	})
 
 	$.ajax({
@@ -74,7 +81,7 @@ $("#submit").on("click", function(event){
 	})
 
 	var queryUrlYouTube    = "https://www.googleapis.com/youtube/v3/search";
-	var query = title;
+	var query = title + "trailer";
 
 	$.ajax({
 		url: queryUrlYouTube,
@@ -102,18 +109,10 @@ $("#submit").on("click", function(event){
 database.ref().limitToLast(10).on("child_added", function(snapshot){
 	var sv = snapshot.val();
 	console.log(sv);
-	$("tbody").append($("<tr><td>" + sv.title + "</td><td>" + sv.plot + "</td><td>" + sv.releaseYear + "</td><td>" + sv.genre + "</td><td>" + sv.type + ""))
+	$("tbody").append($("<tr><td>" + sv.title + "</td><td>" + sv.plot + "</td><td>" + sv.releaseYear + "</td><td>" + sv.genre + "</td><td>" + sv.type + "</td><td><button type='submit'>Trailer</button></td></tr>"))
 })
 
 
 
 
 
-/*
-
-$.ajax({
-	url: queryUrl,
-	method: "GET"
-}).done(function(response){
-	console.log(response)
-})*/
