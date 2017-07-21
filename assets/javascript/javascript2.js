@@ -16,7 +16,7 @@ $(document).ready(function(){
 
 		setTimeout(function(){
 
-			document.location.href = "newURLHere";
+			document.location.href = "https://alexv9582.github.io/GroupProjectOne/";
 
 		}, 3000);
 
