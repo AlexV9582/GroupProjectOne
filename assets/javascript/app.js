@@ -68,8 +68,11 @@ $("#submit").on("click", function(event){
 		method: "GET"
 	}).done(function(response){
 		console.log(response)
-		plot = response.Plot
+		plot        = response.Plot
+		genre       = response.Genre
 		releaseYear = response.Released
+		type        = response.Type
+		title       = response.Title
 		console.log("plot: " + plot)
 		console.log(title)
 		push()
@@ -107,9 +110,12 @@ $("#submit").on("click", function(event){
 database.ref().limitToLast(10).on("child_added", function(snapshot){
 	var sv = snapshot.val();
 	console.log("sv: ");
-	$("tbody").append($("<tr><td>" + sv.title + "</td><td>" + sv.plot + "</td><td>" + sv.releaseYear + "</td><td>" + sv.genre + "</td><td>" + sv.type + "</td><td><button type='submit'>Trailer</button></td></tr>"))
+	$("tbody").append($("<tr><td>" + sv.title + "</td><td>" + sv.plot + "</td><td>" + sv.releaseYear + "</td><td>" + sv.genre + "</td><td>" + sv.type + "</td><td><button type='submit' id='trailer'>Trailer</button></td></tr>"))
 })
 
+/*$("#trailer").on("click", function(){
+	document.location.href = this.response.
+})*/
 
 
 
