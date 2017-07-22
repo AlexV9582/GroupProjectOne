@@ -19,11 +19,11 @@ var database = firebase.database();
 //Function to push data to DB
 function push(){
 	database.ref().push({
-		title:             $("#title").val().trim(),
-		plotLength:        $("#plotLength").val(),
-		releaseYear:       $("#releaseYear").val().trim(),
-		type:              $("#type").val(),
-		genre:             $("#genre").val(),
+		title:             title,
+		plotLength:        plotLength,
+		releaseYear:       releaseYear,
+		type:              type,
+		genre:             genre,
 		plot:              plot
 	})
 	
@@ -69,7 +69,9 @@ $("#submit").on("click", function(event){
 	}).done(function(response){
 		console.log(response)
 		plot = response.Plot
-		console.log(plot)
+		releaseYear = response.Released
+		console.log("plot: " + plot)
+		console.log(title)
 		push()
 	})
 
@@ -77,7 +79,7 @@ $("#submit").on("click", function(event){
 	url: queryUrlGuideBox,
 	method: "GET"
 	}).done(function(response){
-		console.log(response)
+		console.log("GuideBox: " + response)
 	})
 
 	var queryUrlYouTube    = "https://www.googleapis.com/youtube/v3/search";
@@ -93,22 +95,18 @@ $("#submit").on("click", function(event){
 			part: "snippet"
 		}
 	}).done(function(response){
-			console.log(response)
+			console.log("YouTube: " + response)
 	})
 	
 
-	title       = $("#title").val("");
-	plotLength  = $("plotLength").val("");
-	genre       = $("#genre").val("");
-	releaseYear = $("#releaseYear").val("");
-	type        = $("#type").val("");
-
+	$("#title").val("");
+	$("#releaseYear").val("");
 })
 
 //Add data to table
 database.ref().limitToLast(10).on("child_added", function(snapshot){
 	var sv = snapshot.val();
-	console.log(sv);
+	console.log("sv: ");
 	$("tbody").append($("<tr><td>" + sv.title + "</td><td>" + sv.plot + "</td><td>" + sv.releaseYear + "</td><td>" + sv.genre + "</td><td>" + sv.type + "</td><td><button type='submit'>Trailer</button></td></tr>"))
 })
 
