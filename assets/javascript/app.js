@@ -15,6 +15,8 @@ var releaseYear;
 var type;
 var genre;
 var database = firebase.database();
+var trailer;
+var poster;
 
 //Function to push data to DB
 function push(){
@@ -110,12 +112,12 @@ $("#submit").on("click", function(event){
 database.ref().limitToLast(10).on("child_added", function(snapshot){
 	var sv = snapshot.val();
 	console.log("sv: ");
-	$("tbody").append($("<tr><td>" + sv.title + "</td><td>" + sv.plot + "</td><td>" + sv.releaseYear + "</td><td>" + sv.genre + "</td><td>" + sv.type + "</td><td><button type='submit' id='trailer'>Trailer</button></td></tr>"))
+	$("tbody").append($("<tr><td>" + sv.title + "</td><td>" + sv.plot + "</td><td>" + sv.releaseYear + "</td><td>" + sv.genre + "</td><td>" + sv.type + "</td><td><button type='button' data-toggle='modal' data-target='#Trailer' id='trailer'>Trailer</button></td></tr>"))
 })
 
-/*$("#trailer").on("click", function(){
-	document.location.href = this.response.
-})*/
+$("#trailer").on("click", function(){
+	$("#Trailer").modal("show")
+})
 
 
 
