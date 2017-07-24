@@ -46,6 +46,7 @@ database.ref().on("value", function(snapshot) {
    	    genre        = snapshot.val().genre;
    	    plot         = snapshot.val().plot;
    	    poster       = snapshot.val().poster
+   	    trailer      = snapshot.val().trailer
    	}
 })
 //On Submit click add user input to firebase
@@ -69,60 +70,26 @@ $("#submit").on("click", function(event){
 
 	//Make api calls for user input fields
 	
-	$.ajax({
-		url: queryUrlOmdb,
-		method: "GET"
-	}).done(function(omdbResponse){
-		//console.log(response)
-		plot        = omdbResponse.Plot
-		genre       = omdbResponse.Genre
-		releaseYear = omdbResponse.Released
-		type        = omdbResponse.Type
-		title       = omdbResponse.Title
-		$("#description").html(plot)
-		//console.log("plot: " + plot)
-		//console.log(title)
+	$.when($.ajax("https://www.omdbapi.com/?t=" + title + "&y= " + releaseYear + "&plot=" + plotLength + "&apikey=40e9cece", $.ajax("https://api-public.guidebox.com/v2/search?api_key=155b7418532bb36f6fa21cd7eed82f2e1913b798&type=" + type + "&field=title&query=" + title + "&genres=" + genre), $.ajax("https://www.googleapis.com/youtube/v3/search?q=" + title + "%20trailer&part=snippet&maxResults=10&key=AIzaSyDQ8Tst3v2WmurGUFrLdEYyd1EibjkDb6c")
+	).done(function(a1, a2, a3)
+	{
+		plot        = a1.Plot
+		genre       = a1.Genre
+		releaseYear = a1.Released
+		type        = a1.Type
+		title       = a1.Title
+		poster      = a1.Poster
+		trailer     = a3.responseJSON.id.videoId
 		push()
-	})
-	$(document).ajaxError(function(e, xhr, opt){
-		        alert("Error requesting " + opt.url + ": " + xhr.status + " " + xhr.statusText);
-		    });
-
-	$.ajax({
-	url: queryUrlGuideBox,
-	method: "GET"
-	}).done(function(guideBoxResponse){
-		console.log("GuideBox:")
-		console.log(guideBoxResponse)
-		poster = guideBoxResponse.results[0].poster_400x570
-		$("#poster").attr("src", guideBoxResponse.results[0].poster_400x570)
-		push()
-	})
-	$(document).ajaxError(function(e, xhr, opt){
-	        alert("Error requesting " + opt.url + ": " + xhr.status + " " + xhr.statusText);
-	    });
-	var queryUrlYouTube    = "https://www.googleapis.com/youtube/v3/search";
-	var query = title + " trailer";
-
-	$.ajax({
-		url: queryUrlYouTube,
-		method: "GET",
-		data: {
-			key: "AIzaSyDQ8Tst3v2WmurGUFrLdEYyd1EibjkDb6c",
-			q: query,
-			maxResults: 10,
-			part: "snippet"
-		}
-	}).done(function(youtubeResponse){
-			console.log("YouTube:");
-			console.log(youtubeResponse);
-			$("#movieTrailer").attr("src", "https://www.youtube.com/embed/" + youtubeResponse.items[0].id.videoId);
-	})
-		$(document).ajaxError(function(e, xhr, opt){
-		        alert("Error requesting " + opt.url + ": " + xhr.status + " " + xhr.statusText);
-		    });
-	
-
+		console.log("a1")
+		console.log(a1)
+		console.log("a2")
+		console.log(a2)
+		//console.log("Poster")
+		//console.log(a2.responseJSON.Poster)
+		console.log("a3")
+		console.log(a3)
+	}))
 	$("#title").val("");
 	$("#releaseYear").val("");
 })
@@ -134,18 +101,18 @@ database.ref().limitToLast(10).on("child_added", function(snapshot){
 	
 	//sv.title = '"bob"'
 	var convertedTitle = sv.title.replace(/"/g, '&quot')
-	console.log(convertedTitle)
+	//console.log(convertedTitle)
 
 	$("tbody").append($('<tr><td>' + sv.title + '</td><td>' + sv.plot + '</td><td>' + sv.releaseYear + '</td><td>' + sv.genre + 
 		'</td><td>' + sv.type + '</td><td><button type="button" data-toggle="modal" data-target="#Trailer" class="trailer" data-title="'+ convertedTitle + '">Trailer</button></td></tr>'))
-	console.log(sv.title)
+	//console.log(sv.title)
 	$(".table").on("click", ".trailer", (function(){
 	//	$("#Trailer").modal("show")
 	//change trailer from id to class on button and click listener
 		var titleHeader = $(this).attr("data-title")
-		console.log(titleHeader)
+		//console.log(titleHeader)
 		$(".modal-title").html(titleHeader);
-		
+		$("#movieTrailer").attr("src", )
 
 	}))
 })
