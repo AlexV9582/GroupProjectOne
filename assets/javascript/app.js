@@ -17,6 +17,9 @@ var genre;
 var database = firebase.database();
 var trailer;
 var poster;
+var guideBoxResponse;
+var omdbResponse;
+var youtubeResponse;
 
 //Function to push data to DB
 function push(){
@@ -26,7 +29,8 @@ function push(){
 		releaseYear:       releaseYear,
 		type:              type,
 		genre:             genre,
-		plot:              plot
+		plot:              plot,
+		poster:            poster
 	})
 	
 }
@@ -41,6 +45,7 @@ database.ref().on("value", function(snapshot) {
 	    type         = snapshot.val().type;
    	    genre        = snapshot.val().genre;
    	    plot         = snapshot.val().plot;
+   	    poster       = snapshot.val().poster
    	}
 })
 //On Submit click add user input to firebase
@@ -63,32 +68,41 @@ $("#submit").on("click", function(event){
 	//console.log(genre);
 
 	//Make api calls for user input fields
-
 	
 	$.ajax({
 		url: queryUrlOmdb,
 		method: "GET"
-	}).done(function(response){
+	}).done(function(omdbResponse){
 		//console.log(response)
-		plot        = response.Plot
-		genre       = response.Genre
-		releaseYear = response.Released
-		type        = response.Type
-		title       = response.Title
+		plot        = omdbResponse.Plot
+		genre       = omdbResponse.Genre
+		releaseYear = omdbResponse.Released
+		type        = omdbResponse.Type
+		title       = omdbResponse.Title
+		$("#description").html(plot)
 		//console.log("plot: " + plot)
 		//console.log(title)
 		push()
 	})
+	$(document).ajaxError(function(e, xhr, opt){
+		        alert("Error requesting " + opt.url + ": " + xhr.status + " " + xhr.statusText);
+		    });
 
 	$.ajax({
 	url: queryUrlGuideBox,
 	method: "GET"
-	}).done(function(response){
-		//console.log("GuideBox: " + response)
+	}).done(function(guideBoxResponse){
+		console.log("GuideBox:")
+		console.log(guideBoxResponse)
+		poster = guideBoxResponse.results[0].poster_400x570
+		$("#poster").attr("src", guideBoxResponse.results[0].poster_400x570)
+		push()
 	})
-
+	$(document).ajaxError(function(e, xhr, opt){
+	        alert("Error requesting " + opt.url + ": " + xhr.status + " " + xhr.statusText);
+	    });
 	var queryUrlYouTube    = "https://www.googleapis.com/youtube/v3/search";
-	var query = title + "trailer";
+	var query = title + " trailer";
 
 	$.ajax({
 		url: queryUrlYouTube,
@@ -99,9 +113,14 @@ $("#submit").on("click", function(event){
 			maxResults: 10,
 			part: "snippet"
 		}
-	}).done(function(response){
-			//console.log("YouTube: " + response)
+	}).done(function(youtubeResponse){
+			console.log("YouTube:");
+			console.log(youtubeResponse);
+			$("#movieTrailer").attr("src", "https://www.youtube.com/embed/" + youtubeResponse.items[0].id.videoId);
 	})
+		$(document).ajaxError(function(e, xhr, opt){
+		        alert("Error requesting " + opt.url + ": " + xhr.status + " " + xhr.statusText);
+		    });
 	
 
 	$("#title").val("");
@@ -122,7 +141,7 @@ database.ref().limitToLast(10).on("child_added", function(snapshot){
 	console.log(sv.title)
 	$(".table").on("click", ".trailer", (function(){
 	//	$("#Trailer").modal("show")
-	//change trailer from id to class on button and clikc listener
+	//change trailer from id to class on button and click listener
 		var titleHeader = $(this).attr("data-title")
 		console.log(titleHeader)
 		$(".modal-title").html(titleHeader);
@@ -130,6 +149,10 @@ database.ref().limitToLast(10).on("child_added", function(snapshot){
 
 	}))
 })
+
+
+
+
 
 
 
