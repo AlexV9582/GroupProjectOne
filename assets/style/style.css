@@ -21,3 +21,11 @@ h2
 	color:blue;
 	font-weight:bold;
 }
+.modal-dialog.modal-lg
+{
+	width:auto;
+}
+iframe
+{
+	height:800px;
+}

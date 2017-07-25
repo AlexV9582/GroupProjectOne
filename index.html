@@ -3,13 +3,20 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>BaH Entertainment</title>
+		<link rel="stylesheet" type="text/css" href="assets/style/reset.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="assets/style/style.css">
+		<script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
 	</head>
+<<<<<<< HEAD
 	<link rel="stylesheet" type="text/css" href="assets/style/reset.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="assets/style/style.css">
 	<link rel="shortcut icon" href="assets/favicon/favicon.ico" type="image/x-icon" />
 	<link rel="icon" href="assets/favicon/favicon.ico" type="image/ico" />
 	<script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
+=======
+>>>>>>> ef2868512bd83a034b849cc7bbb5db7fb73a6618
 	<body>
 		<div class="container-fluid">
 			<div class="jumbotron">
@@ -28,7 +35,7 @@
 											<tr>
 												<th>Title</th>
 												<th>Plot Summary</th>
-												<th>Release Year</th>
+												<th>Release Date</th>
 												<th>Genre</th>
 												<th>Type</th>
 											</tr>
@@ -76,7 +83,7 @@
 								<option id="crime&gangster" value="crime&gangster">Crime and Gangster</option>
 								<option id="drama" value="drama">Drama</option>
 								<option id="epics/historical" value="epics/historical">Epics/Historical</option>
-								<option id="horror" value="horror">horror</option>
+								<option id="horror" value="horror">Horror</option>
 								<option id="scienceFiction" value="scienceFiction">Science Fiction</option>
 								<option id="war" value="war">War</option>
 								<option id="western" value="western">Western</option>
@@ -99,9 +106,8 @@
 					</div>
 				</div>
 			</div>
-			<button type="button" data-toggle="modal" data-target="#Trailer"> Open Modal </button>
 			<div id="Trailer" class="modal fade" role="dialog">
-				<div class="modal-dialog">
+				<div class="modal-dialog modal-lg">
 					<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal">&times
@@ -109,7 +115,9 @@
 							<h4 class="modal-title">Movie Info</h4>
 						</div>
 						<div class="modal-body">
-							<p>Filler text</p>
+							<img id="poster" src="#"></img>
+							<p id="description">aslfleah</p>
+							<iframe id="movieTrailer" src="https://data1.origin.com/content/dam/originx/web/app/games/battlefield/battlefield-1/screenshots/battlefield-1/1038423_screenhi_930x524_en_ww_gunfire_v1.jpg" height="100%" width="100%"></iframe>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -121,6 +129,6 @@
 	</div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script type="text/javascript" src="assets/javascript/app.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </html>
