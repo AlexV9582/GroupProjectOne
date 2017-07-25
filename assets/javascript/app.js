@@ -70,16 +70,16 @@ $("#submit").on("click", function(event){
 
 	//Make api calls for user input fields
 	
-	$.when($.ajax("https://www.omdbapi.com/?t=" + title + "&y= " + releaseYear + "&plot=" + plotLength + "&apikey=40e9cece", $.ajax("https://api-public.guidebox.com/v2/search?api_key=155b7418532bb36f6fa21cd7eed82f2e1913b798&type=" + type + "&field=title&query=" + title + "&genres=" + genre), $.ajax("https://www.googleapis.com/youtube/v3/search?q=" + title + "%20trailer&part=snippet&maxResults=10&key=AIzaSyDQ8Tst3v2WmurGUFrLdEYyd1EibjkDb6c")
+	$.when($.ajax("https://www.omdbapi.com/?t=" + title + "&y= " + releaseYear + "&plot=" + plotLength + "&apikey=40e9cece"), $.ajax("https://api-public.guidebox.com/v2/search?api_key=155b7418532bb36f6fa21cd7eed82f2e1913b798&type=" + type + "&field=title&query=" + title + "&genres=" + genre), $.ajax("https://www.googleapis.com/youtube/v3/search?q=" + title + "%20trailer&part=snippet&maxResults=10&key=AIzaSyDQ8Tst3v2WmurGUFrLdEYyd1EibjkDb6c")
 	).done(function(a1, a2, a3)
 	{
-		plot        = a1.Plot
-		genre       = a1.Genre
-		releaseYear = a1.Released
-		type        = a1.Type
-		title       = a1.Title
-		poster      = a1.Poster
-		//trailer     = a3[0].responseJSON.id.videoId
+		plot        = a1[0].Plot
+		genre       = a1[0].Genre
+		releaseYear = a1[0].Released
+		type        = a1[0].Type
+		title       = a1[0].Title
+		poster      = a1[0].Poster
+		trailer     = a3[0].items[0].id.videoId
 		push()
 		console.log("a1")
 		console.log(a1)
@@ -89,8 +89,7 @@ $("#submit").on("click", function(event){
 		//console.log(a2.responseJSON.Poster)
 		console.log("a3")
 		console.log(a3)
-		console.log(a4)
-	}))
+	})
 	$("#title").val("");
 	$("#releaseYear").val("");
 })
@@ -105,7 +104,7 @@ database.ref().limitToLast(10).on("child_added", function(snapshot){
 	//console.log(convertedTitle)
 
 	$("tbody").append($('<tr><td>' + sv.title + '</td><td>' + sv.plot + '</td><td>' + sv.releaseYear + '</td><td>' + sv.genre + 
-		'</td><td>' + sv.type + '</td><td><button type="button" data-toggle="modal" data-target="#Trailer" class="trailer" data-title="' + convertedTitle + '" data-poster="' + sv.poster + '" data-plot="' + sv.plot +'" data-trailer="' + sv.trailer + '">Trailer</button></td></tr>'))
+		'</td><td>' + sv.type + '</td><td><button type="button" data-toggle="modal" data-target="#Trailer" class="trailer" data-title="' + convertedTitle + '" data-poster="' + sv.poster + '" data-plot="' + sv.plot +'" data-trailer="https://www.youtube.com/embed/' + sv.trailer + '">Trailer</button></td></tr>'))
 	//console.log(sv.title)
 	$(".table").on("click", ".trailer", (function(){
 	//	$("#Trailer").modal("show")
