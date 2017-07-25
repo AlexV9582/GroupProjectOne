@@ -30,7 +30,8 @@ function push(){
 		type:              type,
 		genre:             genre,
 		plot:              plot,
-		poster:            poster
+		poster:            poster,
+		trailer:           trailer
 	})
 	
 }
