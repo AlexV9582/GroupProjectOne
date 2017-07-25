@@ -79,7 +79,7 @@ $("#submit").on("click", function(event){
 		type        = a1.Type
 		title       = a1.Title
 		poster      = a1.Poster
-		trailer     = a3.responseJSON.id.videoId
+		//trailer     = a3[0].responseJSON.id.videoId
 		push()
 		console.log("a1")
 		console.log(a1)
@@ -89,6 +89,7 @@ $("#submit").on("click", function(event){
 		//console.log(a2.responseJSON.Poster)
 		console.log("a3")
 		console.log(a3)
+		console.log(a4)
 	}))
 	$("#title").val("");
 	$("#releaseYear").val("");
@@ -104,15 +105,20 @@ database.ref().limitToLast(10).on("child_added", function(snapshot){
 	//console.log(convertedTitle)
 
 	$("tbody").append($('<tr><td>' + sv.title + '</td><td>' + sv.plot + '</td><td>' + sv.releaseYear + '</td><td>' + sv.genre + 
-		'</td><td>' + sv.type + '</td><td><button type="button" data-toggle="modal" data-target="#Trailer" class="trailer" data-title="'+ convertedTitle + '">Trailer</button></td></tr>'))
+		'</td><td>' + sv.type + '</td><td><button type="button" data-toggle="modal" data-target="#Trailer" class="trailer" data-title="' + convertedTitle + '" data-poster="' + sv.poster + '" data-plot="' + sv.plot +'" data-trailer="' + sv.trailer + '">Trailer</button></td></tr>'))
 	//console.log(sv.title)
 	$(".table").on("click", ".trailer", (function(){
 	//	$("#Trailer").modal("show")
 	//change trailer from id to class on button and click listener
 		var titleHeader = $(this).attr("data-title")
+		var dataTrailer = $(this).attr("data-trailer")
+		var dataPlot    = $(this).attr("data-plot")
+		var dataPoster  = $(this).attr("data-poster")
 		//console.log(titleHeader)
 		$(".modal-title").html(titleHeader);
-		$("#movieTrailer").attr("src", )
+		$("#movieTrailer").attr("src", dataTrailer)
+		$("#poster").attr("src", dataPoster)
+		$("#description").html(dataPlot)
 
 	}))
 })
