@@ -24,5 +24,8 @@ h2
 .modal-dialog.modal-lg
 {
 	width:auto;
-	height:95%;
+}
+iframe
+{
+	height:800px;
 }
